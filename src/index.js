@@ -12,32 +12,26 @@ const firebaseConfig = {
 
 // IMPORT FIREBASE, INIT APP AND SERVICES
 import { initializeApp } from 'firebase/app'
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
 
-import { getFirestore, collection, getDocs } from 'firebase/firestore'
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore'
 const db = getFirestore()
 
 // PLAYGROUND
 // Load a Firestore collection, make a promise gets collection data
 // Use arrow function cause?
 const colRef = collection(db, 'books')
-getDocs(colRef)
-    .then((snapshot) => {
+onSnapshot(colRef, (snapshot) => {
         let books = []
         snapshot.docs.forEach((doc) => {
             books.push({ ...doc.data(), id: doc.id })
-            const h1Element = document.createElement("h1")
-            h1Element.innerText = books[books.length -1]
-            document.body.appendChild(h1Element)
+            const h2Element = document.createElement("h2")
+            h2Element.innerText = books[books.length -1].author+", "+books[books.length -1].title
+            document.body.appendChild(h2Element)
         })
-        
+        console.log(books)
     })
     // Why?
     .catch(err => {
         console.log(err.message)
     })
-
-// H1ement
-const h1Element = document.createElement("h1")
-h1Element.innerText = "Hella Under My Umbrella"
-document.body.appendChild(h1Element)
