@@ -1,14 +1,14 @@
 {
   "name": "mata202309jinx",
   "version": "1.0.0",
-  "description": "",
+  "description": "Firebase backend for MATA",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch"
   },
-  "author": "",
+  "author": "Cris",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^5.88.2",
@@ -16,5 +16,13 @@
   },
   "dependencies": {
     "firebase": "^10.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crskkk/mata202309jinx.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crskkk/mata202309jinx/issues"
+  },
+  "homepage": "https://github.com/crskkk/mata202309jinx#readme"
 }
