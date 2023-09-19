@@ -11,21 +11,38 @@ const firebaseConfig = {
 
 
 // IMPORT FIREBASE, INIT APP AND SERVICES
-import { initializeApp } from 'firebase/app'
+// Firebase itself (+ web?)
+import { 
+    initializeApp 
+} from 'firebase/app'
 const app = initializeApp(firebaseConfig)
-
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore'
+// Firestore, the database. Implementation later on
+import { 
+    getFirestore, collection, onSnapshot,
+    // query, where, orderBy,
+    // serverTimestamp
+ } from 'firebase/firestore'
 const db = getFirestore()
+// Auth. Plus Auth implementation
+import { 
+    getAuth 
+} from 'firebase/auth'
+// 
 
 // PLAYGROUND
-// Load a Firestore collection, make a promise gets collection data
-// Use arrow function cause?
+//  Firestore implementarion:
+//  Load a Firestore collection, make a promise gets collection data
+//  Use arrow function cause?
 const colRef = collection(db, 'books')
 onSnapshot(colRef, (snapshot) => {
         let books = []
         snapshot.docs.forEach((doc) => {
             books.push({ ...doc.data(), id: doc.id })
+
             const h2Element = document.createElement("h2")
+            h2Element.setAttribute('id', doc.id)
+            h2Element.setAttribute('contenteditable', "true")
+            
             h2Element.innerText = books[books.length -1].author+", "+books[books.length -1].title
             document.body.appendChild(h2Element)
         })
