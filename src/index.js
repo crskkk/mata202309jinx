@@ -25,9 +25,26 @@ import {
 const db = getFirestore()
 // Auth. Plus Auth implementation
 import { 
-    getAuth 
+    createUserWithEmailAndPassword,
+    getAuth,
 } from 'firebase/auth'
-// 
+// Signing users (where's acc creation?)
+// initialize
+const auth = getAuth()
+const signupForm = document.querySelector('.signup')
+signupForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const email = signupForm.email.value
+    const password = signupForm.password.value
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((cred)=>{
+        // console.log(cred.user)
+        signupForm.reset()
+        })
+        .catch((err)=>{
+            console.log(err.message)
+        })
+})
 
 // PLAYGROUND
 //  Firestore implementarion:
@@ -48,7 +65,7 @@ onSnapshot(colRef, (snapshot) => {
         })
         console.log(books)
     })
-    // Why?
+    // Standard error catcher
     .catch(err => {
         console.log(err.message)
     })
